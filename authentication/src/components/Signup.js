@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
-import { useAuth } from "./contexts/AuthContext.jsx"
+import { useAuth } from "../contexts/AuthContext"
 
-const Signup = () => {
+export default function Signup() {
 
     const emailRef = useRef()
     const passwordRef = useRef()
@@ -43,5 +43,3 @@ const Signup = () => {
         </>
     )
 }
-
-export default Signup
