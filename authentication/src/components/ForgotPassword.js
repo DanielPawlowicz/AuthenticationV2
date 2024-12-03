@@ -1,27 +1,27 @@
 import React, { useRef, useState } from 'react'
 import { Card, Form, Button, Alert } from 'react-bootstrap'
 import { useAuth } from "../contexts/AuthContext"
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-export default function Login() {
+const ForgotPassword = () => {
 
     const emailRef = useRef()
-    const passwordRef = useRef()
-    const { login } = useAuth()
+    const { resetPassword } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
+    const [message, setMessage] = useState('')
 
     async function handleSubmit(e) {
         e.preventDefault()
 
         try {
+            setMessage('')
             setError('')
             setLoading(true)
-            await login(emailRef.current.value, passwordRef.current.value)
-            navigate('/')
+            await resetPassword(emailRef.current.value)
+            setMessage('Check your inbox for further instructions')
         } catch {
-            setError('Failed to sign in')
+            setError('Failed to reset password')
         }
 
         setLoading(false)
@@ -39,14 +39,10 @@ export default function Login() {
                             <Form.Label>Email</Form.Label>
                             <Form.Control type="email" ref={emailRef} required />
                         </Form.Group>
-                        <Form.Group id="password">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" ref={passwordRef} required />
-                        </Form.Group>
-                        <Button disabled={loading} type="submit" className='w-100'>Log In</Button>
+                        <Button disabled={loading} type="submit" className='w-100'>Reset Password</Button>
                     </Form>
                     <div className='w-100 text-center mt-3'>
-                        <Link to="/forgot-password">Forgot Password?</Link>
+                        <Link to="/login">Log In</Link>
                     </div>
                 </Card.Body>
             </Card>
@@ -56,3 +52,5 @@ export default function Login() {
         </>
     )
 }
+
+export default ForgotPassword
