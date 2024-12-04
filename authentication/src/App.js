@@ -7,6 +7,7 @@ import Dashboard from "./components/Dashboard.js";
 import Login from "./components/Login.js";
 import PrivateRoute from "./components/PrivateRoute.js";
 import ForgotPassword from "./components/ForgotPassword.js";
+import UpdateProfile from "./components/UpdateProfile.js";
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
         <Router>
           <AuthProvider>
             <Routes>
-              <Route path="/" element={<PrivateRoute element={<Dashboard />} />} />
+              <Route exact path="/" element={<PrivateRoute element={<Dashboard />} />} />
+              <Route path="/update-profile" element={<PrivateRoute element={<UpdateProfile />} />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
